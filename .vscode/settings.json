@@ -1,0 +1,11 @@
+{
+  "window.zoomLevel": 1,
+  "editor.tabSize": 2,
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+  // "javascript.implicitProjectConfig.experimentalDecorators": true,
+  "editor.codeActionsOnSave": {
+    // #每次保存的时候将代码按eslint格式进行修复
+    "source.fixAll.eslint": true,
+    "eslint.autoFixOnSave": true
+  },
+}
