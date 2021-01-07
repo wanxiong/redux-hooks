@@ -1,21 +1,16 @@
-import React, { memo, useEffect } from 'react'
-import { useDispatch, useSelector, shallowEqual } from 'react-redux'
+import React, { memo } from 'react'
+
 import { RecommendSwiper } from './style';
-import { getBannerAction } from './store/actionCreators'
+import Banner from './components/banner';
+import HotRecommend from './components/hotRecommend';
 
 function Recommend() {
-  const recommend = useSelector((state) => state.get('recommend'), shallowEqual)
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getBannerAction())
-  }, [useDispatch])
-
-  console.log(recommend.toJS())
-
   return (
     <RecommendSwiper>
       {/* 轮播区域 */}
-      Recommend
+      <Banner />
+      {/* 热门推荐 */}
+      <HotRecommend />
     </RecommendSwiper>
   )
 }
