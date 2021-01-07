@@ -1,11 +1,12 @@
+import { fromJS } from 'immutable';
 import * as actionTypes from './constants'
 
-const defaultState = {
+const defaultState = fromJS({
   banners: [],
-}
+})
 
 const actionHandlers = {
-  [actionTypes.BANNER_LIST]: (state, action) => ({ ...state, banners: action.data }),
+  [actionTypes.BANNER_LIST]: (state, action) => state.set('banners', action.data),
 };
 
 function reducer(state = defaultState, action) {

@@ -1,16 +1,16 @@
 import React, { memo, useEffect } from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { RecommendSwiper } from './style';
 import { getBannerAction } from './store/actionCreators'
 
-function Recommend(props) {
-  const { getBanner, banners } = props
-
+function Recommend() {
+  const recommend = useSelector((state) => state.get('recommend'), shallowEqual)
+  const dispatch = useDispatch();
   useEffect(() => {
-    getBanner()
-  }, [])
+    dispatch(getBannerAction())
+  }, [useDispatch])
 
-  console.log(banners)
+  console.log(recommend.toJS())
 
   return (
     <RecommendSwiper>
@@ -20,14 +20,4 @@ function Recommend(props) {
   )
 }
 
-const mapStateToProps = (state) => ({
-  banners: state.recommend.banners,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  getBanner: () => {
-    dispatch(getBannerAction())
-  },
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(memo(Recommend))
+export default memo(Recommend)
