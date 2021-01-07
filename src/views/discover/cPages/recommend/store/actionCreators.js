@@ -1,8 +1,24 @@
-import { getBanner } from '@/services/recommend'
+import {
+  getBanner, getHotRecommend, getNewAlbum, getRankingList,
+} from '@/services/recommend'
 import * as actionsTypes from './constants'
 
 export const getBannerAction = () => async (dispatch) => {
   const status = await getBanner()
-  console.log(status)
   dispatch({ type: actionsTypes.BANNER_LIST, data: status.banners })
+}
+
+export const getHotRecommendAction = () => async (dispatch) => {
+  const status = await getHotRecommend()
+  dispatch({ type: actionsTypes.HOT_RECOMMEND_LSIT, data: status.result })
+}
+
+export const getNewAlbumAction = () => async (dispatch) => {
+  const status = await getNewAlbum()
+  dispatch({ type: actionsTypes.NEW_ALBUM, data: status.albums })
+}
+
+export const getRankingListAction = (id) => async (dispatch) => {
+  const status = await getRankingList(id)
+  dispatch({ type: actionsTypes.RANKING_LIST, data: status.playlist })
 }

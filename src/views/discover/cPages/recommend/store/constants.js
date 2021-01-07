@@ -1,1 +1,4 @@
 export const BANNER_LIST = 'BANNER_LIST'
+export const HOT_RECOMMEND_LSIT = 'HOT_RECOMMEND_LSIT'
+export const NEW_ALBUM = 'NEW_ALBUM'
+export const RANKING_LIST = 'RANKING_LIST'
