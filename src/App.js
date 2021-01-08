@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { renderRoutes } from 'react-router-config';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter as Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import Footer from '@/components/footer';
@@ -12,14 +12,14 @@ import routes from './router'
 function App() {
   return (
     <Provider store={store}>
-      <HashRouter>
+      <Route>
         <div>
           <Header />
           {renderRoutes(routes)}
           <Player />
           <Footer />
         </div>
-      </HashRouter>
+      </Route>
     </Provider>
   );
 }
