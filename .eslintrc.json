@@ -58,6 +58,8 @@
     "jsx-a11y/no-static-element-interactions":0, // event 的时候，不需要 role 属性
     "jsx-a11y/click-events-have-key-events":0,
     "jsx-a11y/no-noninteractive-tabindex":0,
+    "no-restricted-syntax": 0,
+    "jsx-a11y/media-has-caption": 0,
     "import/prefer-default-export": 0, // 到处必须要有export default
     "max-len": ["error", 180] //单行最大字符串长度
   }

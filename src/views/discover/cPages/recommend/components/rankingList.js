@@ -1,6 +1,7 @@
 import React, { memo, useEffect } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
-import { getRankingListAction } from '../store/actionCreators'
+import { changeSongAction } from '@/views/player/store/actionCreators';
+import { getRankingListAction, clearRankingListAction } from '../store/actionCreators'
 import { RankingListWrapper } from './rankingListStyle'
 
 function RankingList() {
@@ -12,9 +13,14 @@ function RankingList() {
     dispatch(getRankingListAction(0))
     dispatch(getRankingListAction(2))
     dispatch(getRankingListAction(3))
+    return () => {
+      dispatch(clearRankingListAction())
+    }
   }, [])
 
-  console.log(data)
+  const changeSong = (item, index) => {
+    dispatch(changeSongAction(item.id, index))
+  }
 
   return (
     <RankingListWrapper>
@@ -29,7 +35,7 @@ function RankingList() {
         {/* 列表 */}
         <div className="ranking-list">
           {
-            data.map((item) => (
+            data.map((item, index) => (
               <div
                 className="ranking-list-item"
                 key={item.name}
@@ -49,7 +55,10 @@ function RankingList() {
                         <span>{i + 1}</span>
                         <span>
                           {subitem.name}
-                          <font className="ranking-list-item-icon" />
+                          <font
+                            className="ranking-list-item-icon"
+                            onClick={() => changeSong(subitem, index)}
+                          />
                         </span>
 
                       </div>

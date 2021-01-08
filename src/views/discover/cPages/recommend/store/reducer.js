@@ -1,4 +1,4 @@
-import { fromJS } from 'immutable';
+import { fromJS, List } from 'immutable';
 import * as actionTypes from './constants'
 
 const defaultState = fromJS({
@@ -16,6 +16,7 @@ const actionHandlers = {
     const list = state.get('rankingList').push(action.data)
     return state.set('rankingList', list)
   },
+  [actionTypes.CLEAR_RANKING_LIST]: (state) => state.set('rankingList', List()),
 };
 
 function reducer(state = defaultState, action) {

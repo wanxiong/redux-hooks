@@ -1,0 +1,3 @@
+export const SONG_DETAIL = 'SONG_DETAIL'
+export const CURRENT_SONG = 'CURRENT_SONG'
+export const CURRENT_INDEX = 'CURRENT_INDEX'

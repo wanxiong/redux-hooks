@@ -22,3 +22,7 @@ export const getRankingListAction = (id) => async (dispatch) => {
   const status = await getRankingList(id)
   dispatch({ type: actionsTypes.RANKING_LIST, data: status.playlist })
 }
+
+export const clearRankingListAction = (data = []) => async (dispatch) => {
+  dispatch({ type: actionsTypes.CLEAR_RANKING_LIST, data })
+}

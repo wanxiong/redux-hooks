@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 
 import Footer from '@/components/footer';
 import Header from '@/components/header';
+import Player from '@/views/player/playbar/index'
 import store from '@/store'
 import routes from './router'
 
@@ -15,11 +16,19 @@ function App() {
         <div>
           <Header />
           {renderRoutes(routes)}
+          <Player />
           <Footer />
         </div>
       </HashRouter>
     </Provider>
   );
 }
+
+// if (module.hot) {
+//   module.hot.accept('./views/discover/cPages/recommend', () => {
+//     console.log(123)
+//     store.dispatch(clearRankingListAction([]))
+//   })
+// }
 
 export default memo(App);
