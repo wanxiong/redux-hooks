@@ -4,7 +4,7 @@ import React, {
 import { Slider, notification } from 'antd';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { formatDate } from '@/utils'
-import { getSongDetailAction } from '../store/actionCreators'
+import { getSongDetailAction, changeNextAction } from '../store/actionCreators'
 import { PlayBarWrapper } from './style'
 
 function getPlaySong(id) {
@@ -58,7 +58,17 @@ function Playbar() {
     }
   }
 
+  // 切换下一首
+  const changeNext = () => {
+    dispatch(changeNextAction('next'))
+  }
+  // 上一首
+  const changePrev = () => {
+    dispatch(changeNextAction('prev'))
+  }
+
   const handleMusicEnded = () => {
+    // 是否切换下一首
     audioRef.current.currentTime = 0;
     setIsPlaying(false);
     setValue(0)
@@ -72,6 +82,7 @@ function Playbar() {
   }, [duration, isPlaying, audioRef]);
 
   const playMusic = () => {
+    console.log(1)
     if (!currentSong.get('id')) {
       notification.open({
         message: '请先选择歌曲哦',
@@ -87,6 +98,19 @@ function Playbar() {
     }
   }
 
+  const keyFn = (e) => {
+    if (e.keyCode === 32) {
+      playMusic()
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', keyFn)
+    return () => {
+      window.removeEventListener('keydown', keyFn)
+    }
+  }, [currentSong, audioRef])
+
   if (!currentSong.get('id')) {
     return (
       <PlayBarWrapper isPlaying={isPlaying}>
@@ -101,12 +125,18 @@ function Playbar() {
       <div className="player-bar" />
       <div className="player-bar-container">
         <div className="player-bar-btn">
-          <span className="player-bar-btn-pre" />
+          <span
+            className="player-bar-btn-pre"
+            onClick={changePrev}
+          />
           <span
             className="player-bar-btn-play"
             onClick={playMusic}
           />
-          <span className="player-bar-btn-next" />
+          <span
+            className="player-bar-btn-next"
+            onClick={changeNext}
+          />
         </div>
         <div className="player-bar-btn-img">
           <img
@@ -116,8 +146,8 @@ function Playbar() {
         </div>
         <div className="player-bar-btn-progress">
           <div className="player-bar-progress-top">
-            <span>{currentSong.getIn(['ar']).map((item) => item.name).join('/')}</span>
             <span>{currentSong.get('name')}</span>
+            <span>{currentSong.getIn(['ar']).map((item) => item.name).join('/')}</span>
           </div>
           <div className="player-bar-progress-bar">
             <Slider
@@ -137,7 +167,6 @@ function Playbar() {
       </div>
       <audio
         ref={audioRef}
-        isPlaying={isPlaying}
         onTimeUpdate={timeUpdate}
         onEnded={handleMusicEnded}
       />

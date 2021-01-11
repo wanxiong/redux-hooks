@@ -53,6 +53,7 @@ export const PlayBarWrapper = styled.div`
           text-indent: -9999px;
           background: url(${playbarSprite}) no-repeat 0 9999px;
           background-position: 0 -130px;
+          cursor: pointer;
         }
         .player-bar-btn-play{
           display: inline-block;
@@ -73,6 +74,7 @@ export const PlayBarWrapper = styled.div`
           margin-right: 8px;
           margin-top: 5px;
           text-indent: -9999px;
+          cursor: pointer;
         }
       }
       .player-bar-btn-img{

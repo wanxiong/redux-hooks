@@ -1,9 +1,11 @@
-import Album from '@/views/discover/cPages/album'
-import Artist from '@/views/discover/cPages/artist'
-import Djradio from '@/views/discover/cPages/djradio'
-import Ranking from '@/views/discover/cPages/ranking'
-import Recommend from '@/views/discover/cPages/recommend'
-import Songs from '@/views/discover/cPages/songs'
+import { lazy } from 'react';
+
+const Album = lazy(() => import('@/views/discover/cPages/album'))
+const Artist = lazy(() => import('@/views/discover/cPages/artist'))
+const Djradio = lazy(() => import('@/views/discover/cPages/djradio'))
+const Ranking = lazy(() => import('@/views/discover/cPages/ranking'))
+const Recommend = lazy(() => import('@/views/discover/cPages/recommend'))
+const Songs = lazy(() => import('@/views/discover/cPages/songs'))
 
 const disChildrenRoutes = [
   {

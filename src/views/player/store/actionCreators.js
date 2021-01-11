@@ -27,5 +27,51 @@ export const changeSongAction = (id, index) => async (dispatch, getState) => {
       type: actionsTypes.CURRENT_INDEX,
       data: itemIndex,
     })
+    dispatch({
+      type: actionsTypes.RANKLIST_INDEX,
+      data: index,
+    })
+  }
+}
+
+export const changeNextAction = (step) => async (dispatch, getState) => {
+  const state = getState()
+  const rankListIndex = state.getIn(['player', 'rankListIndex'])
+  const { tracks } = state.getIn(['recommend', 'rankingList']).get(rankListIndex)
+  let currentIndex = state.getIn(['player', 'currentIndex']) - 0
+  if (step === 'next') {
+    currentIndex++
+  } else {
+    currentIndex--
+  }
+
+  const item = tracks[currentIndex]
+  if (item) {
+    dispatch({
+      type: actionsTypes.CURRENT_SONG,
+      data: item,
+    })
+    dispatch({
+      type: actionsTypes.CURRENT_INDEX,
+      data: currentIndex,
+    })
+  } else if (step === 'next') {
+    dispatch({
+      type: actionsTypes.CURRENT_SONG,
+      data: tracks[0],
+    })
+    dispatch({
+      type: actionsTypes.CURRENT_INDEX,
+      data: 0,
+    })
+  } else {
+    dispatch({
+      type: actionsTypes.CURRENT_SONG,
+      data: tracks[tracks.length - 1],
+    })
+    dispatch({
+      type: actionsTypes.CURRENT_INDEX,
+      data: tracks.length - 1,
+    })
   }
 }

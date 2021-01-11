@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import Discover from '@/views/discover'
-import My from '@/views/my'
-
 import discoverRoutes from './discoverRoutes';
+
+const Discover = lazy(() => import('@/views/discover'))
+const My = lazy(() => import('@/views/my'))
 
 const routes = [
   {

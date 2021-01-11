@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, Suspense } from 'react';
 import { renderRoutes } from 'react-router-config';
 import { BrowserRouter as Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -15,7 +15,9 @@ function App() {
       <Route>
         <div>
           <Header />
-          {renderRoutes(routes)}
+          <Suspense fallback={<div>加载中</div>}>
+            {renderRoutes(routes)}
+          </Suspense>
           <Player />
           <Footer />
         </div>
